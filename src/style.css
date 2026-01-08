@@ -926,7 +926,8 @@ body {
 
   /* Names - Scaled down significantly */
   .home-names {
-    position: static;
+    position: relative;
+    /* Relative positioning needed for ::after shimmer overlay */
     transform: none;
     font-size: 3.5rem;
     /* Much smaller to fit */
