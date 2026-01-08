@@ -1,0 +1,10 @@
+# Replace 'yourdomain.com' with your actual custom domain
+# Example: example.com or www.example.com
+# Note: If you use www.example.com, also set up a redirect from example.com to www.example.com
+# After adding your domain here, commit and push this file.
+# Then configure DNS settings at your domain registrar:
+# - Add a CNAME record pointing to: yourusername.github.io
+# - Or add A records pointing to GitHub Pages IPs: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+# For more info: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
+
+yourdomain.com

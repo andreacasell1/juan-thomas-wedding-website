@@ -1,0 +1,1923 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Fonts */
+  --font-body: "myriad-pro", sans-serif;
+  --font-accent: "snell-roundhand-lt-std", sans-serif;
+
+  /* Colors */
+  --color-grad-start: #869b8a;
+  --color-grad-end: #cad8c5;
+  --color-text-home: #f9f8f5;
+  --color-menu-border: #fff1dc;
+
+  /* Fallbacks/Shared */
+  --color-bg: #ffffff;
+  --color-text-main: #2c3e50;
+}
+
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shared Utilities */
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------
+   HOMEPAGE LAYOUT (Split Screen)
+   --------------------------------------------------------- */
+.home-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  /* Prevent scrolling on homepage */
+  position: relative;
+  /* Container is relative for absolute children */
+}
+
+.home-left {
+  width: 62%;
+  /* 2/3 of screen */
+  background-image: url('/media/Richard_Wilson_-_Tivoli-_The_Temple_of_the_Sybil_and_the_Campagna_-_Google_Art_Project.jpg');
+  background-size: 158%;
+  background-position: 35% 46%;
+  background-repeat: no-repeat;
+}
+
+/* Fix for white space on narrower screens (laptops/portrait)
+@media (max-aspect-ratio: 165/100) {
+  .home-left {
+    background-size: cover;
+  }
+}
+*/
+
+.home-right {
+  flex: 1;
+  /* Takes remaining space */
+  background: linear-gradient(to right, var(--color-grad-start), var(--color-grad-end));
+  position: relative;
+  /* For absolute positioning of children inside right panel */
+  color: var(--color-text-home);
+  padding: 2rem;
+}
+
+/* Header & Menu Container */
+.header {
+  /* Reset header to be transparent and non-intrusive */
+  background-color: transparent;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+  /* Let clicks pass through, enable only for interactive elements */
+}
+
+/* Enable pointer events for the menu container */
+.internal-menu-container {
+  pointer-events: auto;
+  position: relative;
+  display: inline-block;
+}
+
+.footer {
+  padding: 4rem 2rem;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  border-top: 1px solid var(--color-menu-border);
+  z-index: 10;
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Default / Right Side Pages (Location, Travel, Stay) */
+.location-right .header,
+.stay-right .header,
+.travel-right .header {
+  text-align: right;
+  right: 0;
+  left: auto;
+}
+
+.travel-right .header {
+  padding-right: 7.5rem;
+  /* Match travel content padding */
+}
+
+/* Left Side Pages (Details) */
+.details-left .header {
+  text-align: left;
+  left: 0;
+  right: auto;
+}
+
+/* ... (Existing Menu Styles Omitted for brevity, assuming replace_file_content handles lines correctly) ... */
+/* NOTE: I cannot skip lines inside a replace block easily if they are far apart. 
+   I need to target specific blocks. 
+   The request asks to adjust "other screen sizes". 
+   I will do this in multiple chunks to be safe and clear.
+*/
+
+/* Left Side Pages (Details) */
+.details-left .header {
+  text-align: left;
+  left: 0;
+  right: auto;
+}
+
+/* Menu Trigger Button */
+.menu-trigger {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #d8c38a;
+  /* Gold underline for clickability */
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d8c38a;
+  /* Gold color to distinguish from Green headers */
+  cursor: pointer;
+  z-index: 102;
+  position: relative;
+  padding: 0.5rem 0.75rem 0.3rem 0.75rem;
+  /* Increased padding for better touch target */
+  min-height: 44px;
+  /* Ensure minimum touch target size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.menu-trigger:hover {
+  opacity: 0.8;
+  border-color: var(--color-grad-start);
+  /* Hover effect to green */
+  color: var(--color-grad-start);
+}
+
+/* Menu Overlay */
+.menu-overlay {
+  position: absolute;
+  top: 100%;
+  /* Below the trigger */
+  width: 300px;
+  max-width: min(300px, calc(100vw - 2rem));
+  /* Prevent overflow on small screens */
+  /* Fixed width box */
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-menu-border);
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.4s ease-out;
+  /* Soft animation */
+  z-index: 101;
+  text-align: left;
+}
+
+/* Active State */
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Positioning the box relative to trigger based on alignment */
+/* Positioning the box relative to trigger based on alignment */
+/* Right Content Pages (Image Left) -> Menu Top Right -> Align Right Edge */
+.page-right .menu-overlay {
+  right: 0;
+  left: auto;
+}
+
+/* Left Content Pages (Image Right) -> Menu Top Left -> Align Left Edge */
+.page-left .menu-overlay {
+  left: 0;
+  right: auto;
+}
+
+/* Menu List inside Overlay */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list li {
+  margin-bottom: 0.5rem;
+}
+
+.menu-list li:last-child {
+  margin-bottom: 0;
+}
+
+.menu-list a {
+  text-decoration: none;
+  color: var(--color-text-main);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: block;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 0;
+}
+
+.menu-list a:hover {
+  color: var(--color-grad-start);
+  padding-left: 5px;
+}
+
+/* Homepage Text Elements */
+
+/* Top Left Overlay (Over Image) */
+.home-date-location {
+  position: absolute;
+  top: clamp(2rem, 6vh, 6rem);
+  left: clamp(2rem, 4vw, 6rem);
+  color: var(--color-text-home);
+  /* #f9f8f4 */
+  z-index: 10;
+  /* Ensure it's above the image */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  /* Legibility */
+}
+
+.home-location {
+  font-size: clamp(1rem, 3.5vw, 3rem);
+  /* Fluid sizing */
+  font-weight: 700;
+  line-height: 1.0;
+}
+
+.home-date {
+  font-size: clamp(1rem, 3.5vw, 3rem);
+  /* Fluid sizing */
+  font-weight: 700;
+  margin-top: 0;
+  /* Removed letter-spacing/uppercase to match "fancy font" better */
+}
+
+/* Top Right of Right Panel */
+.home-update {
+  position: absolute;
+  top: clamp(2rem, 6vh, 6rem);
+  right: clamp(2rem, 4vw, 6rem);
+  /* Removed specific text styles from wrapper since now using children */
+  /* Keeps position */
+  /* Ensures right alignment for children */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 10;
+  /* Ensure it's above the image on mobile */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  /* Legibility on image */
+}
+
+.home-update-title {
+  font-family: var(--font-accent);
+  font-size: clamp(1rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--color-text-home);
+}
+
+.home-update-date {
+  font-family: var(--font-accent);
+  font-size: clamp(1rem, 3.5vw, 3rem);
+  font-weight: 700;
+  margin-top: 0;
+  color: var(--color-text-home);
+}
+
+/* Feature Names - Center Top */
+.home-names {
+  position: absolute;
+  top: 40%;
+  left: 0%;
+  transform: translate(-55%, -50%);
+  font-size: clamp(5rem, 11.5vw, 18rem);
+  /* Adjusted: Hits 18rem at 2500px, scales down at 2363px (approx 16.9rem) */
+  white-space: nowrap;
+  font-weight: 700;
+
+  /* Setup for Shimmer Overlay */
+  position: absolute;
+  /* Kept absolute as per original */
+  /* Ensure z-index allows overlay */
+}
+
+/* Shimmer Overlay for Title */
+.home-names::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+
+  /* Text Transparency for clipping */
+  color: transparent;
+
+  /* The Shimmer Gradient */
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(240, 230, 210, 0.8) 40%,
+      /* Champagne edge for contrast */
+      rgba(255, 255, 255, 1) 50%,
+      /* Bright white center */
+      rgba(240, 230, 210, 0.8) 60%,
+      /* Champagne edge for contrast */
+      rgba(255, 255, 255, 0) 100%);
+  background-size: 50% 100%;
+  /* Beam width relative to text */
+  background-repeat: no-repeat;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Animation */
+  opacity: 0;
+  /* Start hidden */
+  animation: titleShimmer 2.5s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes titleShimmer {
+  0% {
+    background-position: -50% 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+    /* Fade in quickly */
+  }
+
+  100% {
+    background-position: 250% 0;
+    /* Move further to ensure full exit */
+    opacity: 1;
+  }
+}
+
+/* Bottom Right Menu */
+.home-menu {
+  position: absolute;
+  bottom: clamp(2rem, 6vh, 6rem);
+  list-style: none;
+  text-align: left;
+  margin-left: clamp(1rem, 3vw, 3rem);
+}
+
+.home-menu li {
+  margin-bottom: clamp(0.5rem, 1.5vh, 2rem);
+}
+
+.home-menu a {
+  display: inline-block;
+  color: var(--color-text-home);
+  text-decoration: none;
+  font-size: clamp(1rem, 1.2vw, 2rem);
+  letter-spacing: 1px;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--color-menu-border);
+  /* "Fixed width... quite longer than longest entry" */
+  width: 100%;
+  max-width: 25vw;
+  min-width: 25vw;
+  text-align: left;
+  transition: opacity 0.3s;
+
+  /* Setup for Shimmer */
+  position: relative;
+  overflow: hidden;
+  /* Contains the shimmer */
+}
+
+/* Shimmer Animation Definition */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+  }
+
+  100% {
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+/* The Shimmer Beam */
+.home-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  /* Align to bottom for border effect */
+  left: 0;
+  width: 50%;
+  /* Beam width */
+  height: 2px;
+  /* Match border width */
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      /* Increased opacity for visibility on thin line */
+      rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-150%) skewX(-20deg);
+  /* Start off-screen */
+  pointer-events: none;
+  /* Let clicks pass through */
+}
+
+.home-menu a:hover {
+  opacity: 1;
+  /* Ensure full opacity on hover */
+  transform: scale(1.02);
+  transform-origin: left center;
+}
+
+.home-menu a:hover::after {
+  animation: shimmer 1.2s forwards;
+  /* Slower animation */
+}
+
+/* ---------------------------------------------------------
+   INTERNAL PAGES (To be refined later)
+   --------------------------------------------------------- */
+/* ... keeping basic structure for internal pages if needed for now ... */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Tablet / iPad Layout (768px - 1200px) - FOR TOUCH DEVICES */
+/* Use pointer: coarse as fallback for better touch device detection */
+@media screen and (min-width: 768px) and (max-width: 1200px) and ((hover: none) or (pointer: coarse)) {
+  .home-container {
+    display: block;
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Background Gradient & Container for Top/Bottom Content */
+  .home-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Full background */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Title Top, Menu Bottom */
+    padding: 3rem 0 2rem 0;
+    z-index: 1;
+  }
+
+  /* Image Strip - Middle (Moved up; Taller for visibility) */
+  .home-left {
+    position: absolute;
+    top: 22%;
+    left: 0;
+    /* Removed transform Y centering */
+    width: 100%;
+    height: 45vh;
+    z-index: 5;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Title - Top Center */
+  .home-names {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    font-size: clamp(4rem, 13vw, 9rem);
+    /* Fluid size for tablet */
+    white-space: normal;
+    /* Allow wrapping if needed */
+    line-height: 1.0;
+    z-index: 2;
+  }
+
+  /* Menu - Bottom Center */
+  .home-menu {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+    /* Removed padding-bottom to lower the menu per request */
+  }
+
+  .home-menu li {
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .home-menu a {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+  }
+
+  /* Overlays on Image - Moved to Top Left/Right of Image Strip */
+  .home-date-location,
+  .home-update {
+    top: 26%;
+    /* Lowered to 26% per request */
+    transform: none;
+    /* Removed vertical centering */
+    z-index: 10;
+  }
+
+  .home-date-location {
+    left: 2rem;
+    text-align: left;
+  }
+
+  .home-update {
+    right: 2rem;
+    align-items: flex-end;
+  }
+
+  /* Adjust font sizes for overlay text on tablet if needed */
+  .home-location,
+  .home-date,
+  .home-update-title,
+  .home-update-date {
+    font-size: 1.8rem;
+    color: #fff;
+    /* Ensure visibility on image */
+  }
+
+  /* -----------------------------------------------------------
+     INTERNAL PAGES TABLET LAYOUT
+     Stacking: Title Block -> Image -> Content
+     ----------------------------------------------------------- */
+  .page-container-split {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Enable full page scroll */
+  }
+
+  /* 1. Title Block (Top) */
+  .page-title-overlay {
+    order: 1;
+    position: relative;
+    top: auto;
+    left: auto !important;
+    /* Force reset inline left */
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 20vh;
+    /* Reduced height to allow image to start higher */
+    background-color: #f9f8f4;
+    margin: 0;
+    padding: 4rem 2rem 2rem 2rem;
+    /* Push title down below menu and add side padding */
+
+    /* Centering logic */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Text styling overrides */
+    font-size: clamp(3.5rem, 8.5vw, 8rem);
+    /* Fluid size */
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+    z-index: 10;
+  }
+
+  /* Reset lines for tablet title */
+  .page-title-overlay::before,
+  .page-title-overlay::after {
+    display: none;
+    /* User said "basically a block... page title in middle", implies simplified */
+  }
+
+  /* 2. Image (Middle) */
+  .page-split-fixed-image {
+    order: 2;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: 55vh;
+    /* Increased height per request */
+    z-index: 1;
+  }
+
+  /* 3. Content Panel (Bottom) */
+  .page-split-content-panel {
+    order: 3;
+    width: 100%;
+    height: auto;
+    position: static;
+    /* Allows header to escape if positioned absolute relative to container */
+    background-color: #f9f8f4;
+    overflow: visible;
+    /* Let content flow */
+  }
+
+  /* Header / Menu Positioning */
+  /* We need header to be at the top right of the whole page (Top Block) */
+  /* Since header is inside content-panel (order 3), abs positioning relative to page-container (relative) works if content-panel is static */
+  .page-right .header,
+  .page-left .header {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    text-align: right;
+    padding: 0;
+    width: 100%;
+    /* Ensure full width for alignment */
+    box-sizing: border-box;
+    z-index: 50;
+    /* High z-index to stay on top */
+    pointer-events: none;
+    /* Prevent blocking clicks */
+  }
+
+  .page-right .header a,
+  .page-left .header a,
+  .logo,
+  .nav-links {
+    pointer-events: auto;
+    /* Re-enable for links */
+  }
+
+  /* Content Wrapper */
+  .page-right .content-wrapper,
+  .page-left .content-wrapper,
+  .content-wrapper {
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 700px;
+    /* Reading best practice */
+  }
+
+  .content-section p {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    text-align: center;
+    /* Or justify/left depending on preference, center per request context likely */
+  }
+
+  /* Reset Viewport Scrolling Logic for simple stacked page */
+  .scroll-viewport {
+    height: auto;
+    padding: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow: visible;
+  }
+
+  /* Restore Arrows */
+  .scroll-arrow-container {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, #f9f8f4 40%, rgba(249, 248, 244, 0) 100%);
+    z-index: 100;
+  }
+
+  .scroll-arrow-up {
+    display: block !important;
+    position: fixed;
+    top: 22vh;
+    /* Position below title / menu area */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    opacity: 0.8;
+  }
+
+  .page-container-split {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-split-fixed-image {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    height: 55vh !important;
+    order: 2;
+  }
+
+  .page-split-content-panel {
+    position: static !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 0;
+    order: 3;
+    overflow: visible;
+  }
+
+  .page-title-overlay {
+    order: 1;
+    position: relative;
+    /* Reinforce */
+    box-sizing: border-box;
+    /* Ensure padding is included in width */
+    width: 100%;
+    max-width: 100%;
+    padding: 4rem 2rem 0 2rem;
+    /* Added Horizontal Padding */
+    overflow-wrap: break-word;
+    /* Prevent long word overflow */
+  }
+
+  /* Ensure header works */
+  .page-right .header {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 100%;
+    z-index: 100;
+    padding-right: 2rem;
+    /* Reset padding from 7.5rem */
+  }
+
+}
+
+/* Narrow Desktop Layout (768px - 1200px) - FOR COMPUTERS */
+@media screen and (min-width: 1000px) and (max-width: 1200px) and (hover: hover) {
+  .home-left {
+    width: 62%;
+    /* More balanced split for narrow desktop */
+    background-size: 193%;
+    background-position: 40% 20%;
+  }
+
+  .home-right {
+    width: 38%;
+    flex: none;
+  }
+
+  .home-names {
+    font-size: clamp(4rem, 12vw, 9rem);
+    /* Scale down title */
+  }
+
+  /* Internal Pages Narrow Desktop */
+  .page-split-fixed-image {
+    width: 50%;
+  }
+
+  .page-split-content-panel {
+    width: 50%;
+  }
+
+  .page-right {
+    margin-left: 50%;
+  }
+
+  .page-left {
+    margin-right: 50%;
+  }
+
+  .page-right .header {
+    padding-right: 2rem;
+    /* Tighter padding */
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px) and (hover: hover) {
+  .home-left {
+    width: 62%;
+    /* More balanced split for narrow desktop */
+    background-size: 250%;
+    background-position: 50% 20%;
+  }
+
+  .home-right {
+    width: 38%;
+    flex: none;
+  }
+
+  .home-names {
+    font-size: clamp(4rem, 12vw, 9rem);
+    /* Scale down title */
+  }
+
+}
+
+/* Mobile Layout (< 768px) */
+@media (max-width: 767px) {
+  /* HOMEPAGE MOBILE STYLES */
+  .home-container {
+    flex-direction: column;
+    height: 100vh;
+    /* Force full height */
+    min-height: 100vh;
+    overflow: hidden;
+    /* Prevent scrolling */
+  }
+
+  .home-left {
+    width: 100%;
+    height: 45vh;
+    /* Slightly less than half */
+  }
+
+  .home-date-location {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .home-location,
+  .home-date {
+    font-size: 1.5rem;
+    /* Smaller for mobile fit */
+  }
+
+  .home-right {
+    width: 100%;
+    height: 55vh;
+    /* Remaining space */
+    min-height: 0;
+    /* Allow shrinking */
+    padding: 1rem;
+    /* Reduced padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribute content */
+  }
+
+  /* Restore 'Last Updated' on mobile */
+  .home-update {
+    display: flex;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .home-update-title {
+    font-size: 1.5rem;
+    /* Match other headers */
+  }
+
+  .home-update-date {
+    font-size: 1.5rem;
+  }
+
+  /* Names - Scaled down significantly */
+  .home-names {
+    position: static;
+    transform: none;
+    font-size: 3.5rem;
+    /* Much smaller to fit */
+    text-align: center;
+    margin: 0.5rem 0;
+    /* Reduced margin */
+    white-space: normal;
+    /* Allow wrapping */
+    line-height: 1.1;
+  }
+
+  /* Menu - Center aligned stack */
+  .home-menu {
+    position: static;
+    margin: 0 auto;
+    text-align: center;
+    margin-left: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .home-menu li {
+    margin-bottom: 0.8rem;
+    /* Tighter spacing */
+  }
+
+  .home-menu a {
+    width: 100%;
+    max-width: 100%;
+    /* Remove fixed width to prevent overflow */
+    font-size: 1.1rem;
+    /* Smaller font */
+    text-align: center;
+    padding-bottom: 0.2rem;
+    overflow-wrap: break-word;
+    /* Allow long menu items to wrap */
+  }
+
+  /* INTERNAL PAGES MOBILE STYLES */
+  .page-container-split {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto;
+    /* Allow scroll on mobile parent */
+    position: relative;
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Title Block - Clean Header at Top */
+  .page-title-overlay {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 2rem 1.5rem !important;
+    font-size: clamp(3rem, 10vw, 4.5rem) !important;
+    margin: 0 !important;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.1;
+    text-align: center !important;
+    background-color: #f9f8f4;
+    color: #d8c38a !important;
+    /* Gold color for title */
+    font-family: var(--font-accent);
+    order: 1;
+    z-index: 5;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Remove decorative lines on mobile */
+  .page-title-overlay::before,
+  .page-title-overlay::after {
+    display: none !important;
+  }
+
+  /* Full-Width Image Below Title */
+  .page-split-fixed-image {
+    position: relative !important;
+    width: 100% !important;
+    height: 45vh;
+    order: 2;
+    z-index: 1;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  /* Content Panel Below Image */
+  .page-split-content-panel {
+    position: relative !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    height: auto !important;
+    /* Let it grow */
+    min-height: auto;
+    padding: 3rem 1.5rem;
+    overflow: visible;
+    order: 3;
+    background-color: #f9f8f4;
+  }
+
+  /* Override any page-right or page-left margins */
+  .page-right,
+  .page-left {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .scroll-viewport {
+    padding-top: 0;
+    padding-bottom: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .content-wrapper {
+    padding: 0 !important;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Mobile Typography for Readability */
+  .content-section {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .content-section h2 {
+    font-family: var(--font-body);
+    color: #778c7b;
+    /* Green color for headings */
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .content-section p {
+    color: #6a6f72;
+    /* Gray color for text */
+    margin: 0;
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    /* Prevent content overflow */
+  }
+
+  /* Fix links to wrap properly */
+  .content-wrapper a {
+    color: #778c7b;
+    /* Green color matching headings */
+    text-decoration: underline;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Hide arrows on mobile, just scroll naturally */
+  .scroll-arrow-container,
+  .scroll-arrow-up {
+    display: none;
+  }
+
+  /* MOBILE MENU POSITIONING - Overlay on Image Top Right */
+  .page-split-content-panel {
+    position: relative;
+  }
+
+  .page-split-content-panel .header,
+  .page-right .header,
+  .page-left .header {
+    position: absolute;
+    /* Position on top of the image area */
+    top: -43vh;
+    /* Negative value to move it up onto the image (45vh image - 2rem from top) */
+    right: 1rem;
+    left: auto;
+    width: auto;
+    padding: 0;
+    z-index: 100;
+    pointer-events: auto;
+    text-align: right;
+  }
+
+  /* Style the menu trigger for visibility on images - Ensure 44x44px touch target */
+  .menu-trigger {
+    background-color: rgba(249, 248, 244, 0.95);
+    padding: 0.75rem 1rem;
+    /* Increased padding for 44x44px minimum touch target */
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d8c38a;
+  }
+
+  /* Adjust menu overlay position for mobile - Fix overflow */
+  .menu-overlay {
+    right: 0;
+    left: auto;
+    width: min(calc(100vw - 2rem), 280px);
+    /* Use min() to prevent overflow on small screens */
+    max-width: 280px;
+  }
+
+  /* Reset any conflicting padding from other breakpoints */
+  .travel-right .header,
+  .page-right .header {
+    padding-right: 0;
+  }
+}
+
+/* ---------------------------------------------------------
+   INTERNAL PAGES STYLING
+   --------------------------------------------------------- */
+body {
+  background-color: #f9f8f4;
+  /* Cream background for internal pages */
+  color: #2c3e50;
+  /* Standard dark text for readability */
+}
+
+/* Override nav link colors for internal pages if needed */
+.nav-links a {
+  color: var(--color-grad-start);
+  /* Green */
+}
+
+.logo {
+  color: var(--color-grad-start);
+  /* Green */
+  font-size: 2rem;
+}
+
+/* Page Headers */
+main h1 {
+  color: var(--color-grad-start);
+  margin-top: 1rem;
+}
+
+/* ---------------------------------------------------------
+   INTERNAL PAGES SHARED STYLES (DESKTOP DEFAULT - 768px+)
+   --------------------------------------------------------- */
+@media (min-width: 768px) {
+  /* Shared Container Logic */
+  .page-container-split {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-split-fixed-image {
+    width: 62%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+  }
+
+  /* Right Panel (Content) Default */
+  .page-split-content-panel {
+    width: 38%;
+    height: 100vh;
+    background-color: #f9f8f4;
+    overflow: hidden;
+    /* No scroll on container, handled by viewport */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    animation: contentFadeIn 1s ease-out;
+  }
+
+  @keyframes contentFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Right-Aligned Pages (Location, Travel, Stay) */
+  .page-right {
+    margin-left: 62%;
+  }
+
+  .page-right .page-split-fixed-image {
+    left: 0;
+  }
+
+  /* Ensure Menu is on the Right */
+  .page-right .header {
+    text-align: right;
+    padding-right: 7.5rem;
+  }
+
+  /* Left-Aligned Pages (Details) */
+  .page-left {
+    margin-right: 62%;
+  }
+
+  .page-left .page-split-fixed-image {
+    right: 0;
+  }
+
+  /* Ensure Menu is on the Left */
+  .page-left .header {
+    text-align: left;
+    padding-left: 7.5rem;
+  }
+
+  /* Scroll Viewport (The strict mask) */
+  .scroll-viewport {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    padding-top: 35vh;
+    /* Clear title */
+    padding-bottom: 20vh;
+    /* Clear arrow */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    /* Mask */
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 32vh,
+        black 35vh,
+        black 85%,
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        transparent 32vh,
+        black 35vh,
+        black 85%,
+        transparent 100%);
+  }
+
+  .scroll-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Content Inner Wrapper */
+  .content-wrapper {
+    margin-top: 0;
+    text-align: right;
+    /* Default right alignment */
+    padding-right: 7vw;
+    /* Default big screen padding */
+    padding-left: clamp(2rem, 6vw, 4rem);
+    /* Balanced split-side padding */
+  }
+
+  /* Left Aligned Wrapper (Details) */
+  .page-left .content-wrapper {
+    text-align: left;
+    padding-right: clamp(2rem, 6vw, 6rem);
+    /* Balanced split-side padding */
+    padding-left: 7.5rem;
+  }
+
+  /* Typography Sections */
+  .content-section {
+    margin-bottom: 3rem;
+  }
+
+  .content-section h2 {
+    font-family: var(--font-body);
+    color: #778c7b;
+    font-size: 1.5rem;
+    /* Reduced from 1.8rem */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .content-section p {
+    color: #6a6f72;
+    font-size: 1.3rem;
+    /* Reduced from 1.5rem */
+    line-height: 1.6;
+    max-width: 750px;
+    margin-left: auto;
+    /* For right aligned */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    /* Prevent content overflow on all devices */
+  }
+
+  /* Internal content links styling */
+  .content-wrapper a {
+    color: #778c7b;
+    /* Matching .content-section h2 color */
+    text-decoration: underline;
+    transition: opacity 0.3s;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    /* Prevent long URLs from overflowing */
+  }
+
+  /* Stay list styling - ensure proper wrapping */
+  .stay-list {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .stay-list a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .content-wrapper a:hover {
+    opacity: 0.8;
+  }
+
+  /* Left Aligned Paragraphs */
+  .page-left .content-section p {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  /* Shared Titles */
+  .page-title-overlay {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 0 5vw;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+
+    font-family: var(--font-accent);
+    color: #d8c38a;
+    font-size: clamp(4rem, 8.5vw, 12rem);
+    font-weight: 700;
+    line-height: 0.9;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+    display: flex;
+    align-items: flex-end;
+    /* Align to the bottom of the text */
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .page-title-overlay::before,
+  .page-title-overlay::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #d8c38a;
+    flex: 1;
+    opacity: 0.6;
+    margin-bottom: 0.25em;
+    /* Position at approx 25% from bottom */
+  }
+
+  /* Offset Title to the Right */
+  .page-title-overlay::before {
+    flex: 3;
+    /* Longer line on the left pushes text right */
+    margin-left: -10vw;
+  }
+
+  .page-title-overlay::after {
+    flex: 1;
+    /* Shorter line on the right */
+    margin-right: -5rem;
+  }
+
+  /* Left Page Lines (Details) - Reverse offset */
+  .page-left .page-title-overlay::before {
+    flex: 1;
+    margin-left: -5rem;
+  }
+
+  .page-left .page-title-overlay::after {
+    flex: 3;
+    margin-right: 0;
+  }
+
+  /* Arrows */
+  .scroll-arrow-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    background: linear-gradient(to top, #f9f8f4 20%, rgba(249, 248, 244, 0) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 2rem;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .scroll-arrow-up,
+  .scroll-arrow-down {
+    color: #d8c38a;
+    font-size: 3rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+  }
+
+  .scroll-arrow-up {
+    position: absolute;
+    top: 31vh;
+    /* Positioned below the title area */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 30;
+  }
+
+  .scroll-arrow-up.hidden,
+  .scroll-arrow-down.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+/* End of desktop internal pages styles media query */
+
+/* Shared Responsiveness */
+/* Laptop 1800px (Covers 16" MBP at 1728px) - Restricted to avoid Tablet overlap */
+@media (min-width: 1201px) and (max-width: 1800px) {
+
+  .home-left {
+    /* More balanced split for narrow desktop */
+    background-size: 180%;
+    background-position: 40% 50%;
+  }
+
+  /* Adjust split ratio for laptops: 58.5% Image / 41.5% Content */
+  .home-left,
+  .page-split-fixed-image {
+    width: 58.5%;
+  }
+
+  .page-right {
+    margin-left: 58.5%;
+  }
+
+  .page-left {
+    margin-right: 58.5%;
+  }
+
+  .page-split-content-panel {
+    width: 41.5%;
+  }
+
+  /* Typography Adjustments (Smaller & Tighter) */
+  .content-section h2 {
+    font-size: 1.4rem;
+    /* Reduced from 1.65rem */
+    letter-spacing: -0.6px;
+  }
+
+  .content-section p {
+    font-size: 1.2rem;
+    /* Reduced from 1.35rem */
+    letter-spacing: -0.4px;
+  }
+
+  .page-right .content-wrapper,
+  .page-right .header {
+    padding-right: 6rem;
+  }
+
+  .page-right .content-wrapper {
+    padding-left: 3rem;
+  }
+
+  .page-left .content-wrapper,
+  .page-left .header {
+    padding-left: 6rem;
+  }
+
+  .page-left .content-wrapper {
+    padding-right: 3rem;
+  }
+
+  .page-title-overlay {
+    font-size: clamp(4rem, 8vw, 10rem);
+    padding: 0 4rem;
+  }
+
+  /* Fix offsets slightly for smaller screens */
+  .page-title-overlay.offset-right {
+    left: 4vw;
+  }
+
+  /* Thicker Menu Line */
+  .menu-trigger {
+    border-bottom-width: 2px;
+    padding-bottom: 0;
+    /* Adjust for thicker border */
+  }
+
+  /* Lower the decorative lines */
+  .page-title-overlay::before,
+  .page-title-overlay::after {
+    margin-top: 50px;
+  }
+
+  /* Adjust Scroll Mask to clear the Arrow/Title */
+  .scroll-viewport {
+    padding-top: 38vh;
+    /* Start text lower (default 35vh) */
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 34vh,
+        black 36vh,
+        /* Lowered to clear arrow */
+        black 85%,
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        transparent 34vh,
+        black 36vh,
+        black 85%,
+        transparent 100%);
+  }
+}
+
+/* Large Tablets (iPad Pro 1024px - 1200px) - Touch devices */
+@media screen and (min-width: 1024px) and (max-width: 1200px) and ((hover: none) or (pointer: coarse)) {
+  /* Ensure large tablets get tablet layout, not desktop split */
+  .home-container {
+    display: block;
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .home-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 0 2rem 0;
+    z-index: 1;
+  }
+
+  .home-left {
+    position: absolute;
+    top: 22%;
+    left: 0;
+    width: 100%;
+    height: 45vh;
+    z-index: 5;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .home-names {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    font-size: clamp(4rem, 13vw, 9rem);
+    white-space: normal;
+    line-height: 1.0;
+    z-index: 2;
+  }
+
+  .home-menu {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .home-menu li {
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .home-menu a {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+  }
+
+  .home-date-location,
+  .home-update {
+    top: 26%;
+    transform: none;
+    z-index: 10;
+  }
+
+  .home-date-location {
+    left: 2rem;
+    text-align: left;
+  }
+
+  .home-update {
+    right: 2rem;
+    align-items: flex-end;
+  }
+
+  .home-location,
+  .home-date,
+  .home-update-title,
+  .home-update-date {
+    font-size: 1.8rem;
+    color: #fff;
+  }
+
+  /* Internal pages for large tablets */
+  .page-container-split {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .page-title-overlay {
+    order: 1;
+    position: relative;
+    top: auto;
+    left: auto !important;
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    height: auto;
+    min-height: 20vh;
+    background-color: #f9f8f4;
+    margin: 0;
+    padding: 4rem 2rem 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(3.5rem, 8.5vw, 8rem);
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .page-title-overlay::before,
+  .page-title-overlay::after {
+    display: none;
+  }
+
+  .page-split-fixed-image {
+    order: 2;
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: 55vh;
+    z-index: 1;
+  }
+
+  .page-split-content-panel {
+    order: 3;
+    width: 100%;
+    height: auto;
+    position: static;
+    background-color: #f9f8f4;
+    overflow: visible;
+  }
+
+  .page-right .header,
+  .page-left .header {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    text-align: right;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .page-right .content-wrapper,
+  .page-left .content-wrapper,
+  .content-wrapper {
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .content-section p {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .scroll-viewport {
+    height: auto;
+    padding: 0;
+    mask-image: none;
+    -webkit-mask-image: none;
+    overflow: visible;
+  }
+}
+
+/* Ultra Wide 2300px+ - Optimize content spread */
+@media (min-width: 2300px) {
+  .page-right .content-wrapper,
+  .page-right .header {
+    padding-right: 6rem;
+  }
+
+  .page-left .content-wrapper,
+  .page-left .header {
+    padding-left: 6rem;
+  }
+
+  /* Prevent content from being too spread out */
+  .content-section p {
+    max-width: 850px;
+    /* Slightly wider but still readable */
+  }
+
+  .content-wrapper {
+    max-width: 900px;
+    /* Constrain wrapper width */
+  }
+
+  .page-title-overlay {
+    font-size: clamp(4rem, 8vw, 12rem);
+    /* Cap maximum size */
+  }
+}
+
+/* Specific Background Images */
+.page-split-fixed-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-travel {
+  background-image: url('/media/Sand_Diggers_on_the_Arno_River_(1868).jpg');
+}
+
+.bg-stay {
+  background-image: url('/media/stay.png');
+}
+
+.bg-location {
+  background-image: url('/media/house.jpg');
+}
+
+.bg-details {
+  background-image: url('/media/hero.jpg');
+}
+
+.bg-programme {
+  background-image: url('/media/La_passeggiata_del_Muro_Torto_by_Antonio_Puccinelli.png');
+  background-size: 118%;
+}
+
+/* Very Small Screens (< 320px) - Extra small devices */
+@media (max-width: 319px) {
+  .home-location,
+  .home-date,
+  .home-update-title,
+  .home-update-date {
+    font-size: 1.2rem;
+    /* Even smaller for very small screens */
+  }
+
+  .home-names {
+    font-size: 2.5rem;
+    /* Further reduced for tiny screens */
+  }
+
+  .home-menu a {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    /* Ensure adequate touch target */
+  }
+
+  .content-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .content-section p {
+    font-size: 1rem;
+  }
+
+  .page-title-overlay {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    padding: 1.5rem 1rem;
+  }
+
+  .menu-trigger {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Landscape Orientation */
+@media (max-width: 767px) and (orientation: landscape) {
+  .home-container {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .home-left {
+    height: 50vh;
+    /* Taller in landscape */
+  }
+
+  .home-right {
+    height: 50vh;
+    padding: 0.75rem;
+    /* Reduced padding for landscape */
+  }
+
+  .home-names {
+    font-size: 2.5rem;
+    /* Smaller in landscape */
+    margin: 0.25rem 0;
+  }
+
+  .home-menu {
+    margin-bottom: 0.5rem;
+  }
+
+  .home-menu li {
+    margin-bottom: 0.5rem;
+  }
+
+  .home-menu a {
+    font-size: 1rem;
+  }
+
+  .page-split-fixed-image {
+    height: 50vh;
+    /* Taller in landscape */
+  }
+
+  .page-split-content-panel {
+    min-height: 50vh;
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Mobile Responsiveness (Shared) - STACKS FOR EVERYONE < 768px */
+/* Note: All mobile styles are now consolidated in the @media (max-width: 767px) block above */
