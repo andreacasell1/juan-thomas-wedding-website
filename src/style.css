@@ -1152,6 +1152,12 @@ body {
     max-width: 280px;
   }
 
+  /* Ensure page-left pages also have right-aligned menu on mobile */
+  .page-left .menu-overlay {
+    right: 0;
+    left: auto;
+  }
+
   /* Reset any conflicting padding from other breakpoints */
   .travel-right .header,
   .page-right .header {
