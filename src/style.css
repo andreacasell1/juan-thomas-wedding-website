@@ -904,8 +904,10 @@ body {
     /* Reduced padding */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /* Distribute content */
+    justify-content: flex-start;
+    /* Start from top */
+    gap: 1rem;
+    /* Consistent spacing between elements */
   }
 
   /* Restore 'Last Updated' on mobile */
@@ -929,14 +931,17 @@ body {
     position: relative;
     /* Relative positioning needed for ::after shimmer overlay */
     transform: none;
-    font-size: 3.5rem;
-    /* Much smaller to fit */
+    font-size: 4rem;
+    /* Reduced further to prevent overlap */
     text-align: center;
-    margin: 0.5rem 0;
-    /* Reduced margin */
+    margin: 0;
+    /* Remove margin, let flexbox gap handle spacing */
     white-space: normal;
     /* Allow wrapping */
     line-height: 1.1;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    top: 0%;
   }
 
   /* Menu - Center aligned stack */
@@ -946,6 +951,8 @@ body {
     text-align: center;
     margin-left: 0;
     width: 100%;
+    margin-top: auto;
+    /* Push menu to bottom */
     margin-bottom: 1rem;
   }
 
