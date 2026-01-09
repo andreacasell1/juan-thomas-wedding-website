@@ -562,8 +562,8 @@ body {
     font-size: 1.5rem;
     margin: 0 auto;
     width: auto;
-    min-width: 0;
-    max-width: 90vw;
+    min-width: 40vw;
+    max-width: 40vw;
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -816,67 +816,8 @@ body {
 
 }
 
-/* Narrow Desktop Layout (768px - 1200px) - FOR COMPUTERS */
-@media screen and (min-width: 1000px) and (max-width: 1200px) and (hover: hover) {
-  .home-left {
-    width: 62%;
-    /* More balanced split for narrow desktop */
-    background-size: 193%;
-    background-position: 40% 20%;
-  }
-
-  .home-right {
-    width: 38%;
-    flex: none;
-  }
-
-  .home-names {
-    font-size: clamp(4rem, 12vw, 9rem);
-    /* Scale down title */
-  }
-
-  /* Internal Pages Narrow Desktop */
-  .page-split-fixed-image {
-    width: 50%;
-  }
-
-  .page-split-content-panel {
-    width: 50%;
-  }
-
-  .page-right {
-    margin-left: 50%;
-  }
-
-  .page-left {
-    margin-right: 50%;
-  }
-
-  .page-right .header {
-    padding-right: 2rem;
-    /* Tighter padding */
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 999px) and (hover: hover) {
-  .home-left {
-    width: 62%;
-    /* More balanced split for narrow desktop */
-    background-size: 250%;
-    background-position: 50% 20%;
-  }
-
-  .home-right {
-    width: 38%;
-    flex: none;
-  }
-
-  .home-names {
-    font-size: clamp(4rem, 12vw, 9rem);
-    /* Scale down title */
-  }
-
-}
+/* Removed narrow desktop media queries - small desktop/laptop screens (768-1200px) 
+   now use the tablet/mobile stacked layout for better UX */
 
 /* Mobile Layout (< 768px) */
 @media (max-width: 767px) {
@@ -1528,12 +1469,6 @@ main h1 {
 /* Laptop 1800px (Covers 16" MBP at 1728px) - Restricted to avoid Tablet overlap */
 @media (min-width: 1201px) and (max-width: 1800px) {
 
-  .home-left {
-    /* More balanced split for narrow desktop */
-    background-size: 180%;
-    background-position: 40% 50%;
-  }
-
   /* Adjust split ratio for laptops: 58.5% Image / 41.5% Content */
   .home-left,
   .page-split-fixed-image {
@@ -1775,3 +1710,23 @@ main h1 {
 
 /* Mobile Responsiveness (Shared) - STACKS FOR EVERYONE < 768px */
 /* Note: All mobile styles are now consolidated in the @media (max-width: 767px) block above */
+
+/* Custom media queries for homepage background image */
+
+@media (min-width: 1500px) and (max-width: 1800px) {
+
+  .home-left {
+    /* More balanced split for narrow desktop */
+    background-size: 195%;
+    background-position: 60% 15%;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1499px) {
+
+  .home-left {
+    /* More balanced split for narrow desktop */
+    background-size: 250%;
+    background-position: 60% 15%;
+  }
+}
