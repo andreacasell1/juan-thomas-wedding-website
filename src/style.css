@@ -556,7 +556,7 @@ body {
   .home-date,
   .home-update-title,
   .home-update-date {
-    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    font-size: clamp(0.9rem, 3.5vw, 2rem);
     color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     line-height: 1.2;
@@ -847,6 +847,10 @@ body {
 
   .home-date-location {
     left: 1.2rem;
+  }
+
+  .home-location, .home-date, .home-update-title, .home-update-date {
+    font-size: 1.5rem;
   }
 
   .home-update {
