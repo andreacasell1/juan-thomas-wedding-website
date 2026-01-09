@@ -129,11 +129,46 @@ function initSmartScroll() {
   window.addEventListener('resize', checkScroll, { passive: true });
 }
 
+// Image Preloader to prevent flickering
+function initImagePreloader() {
+  const imageContainers = document.querySelectorAll('.home-left, .page-split-fixed-image');
+  
+  imageContainers.forEach(container => {
+    // Get background image URL from computed style
+    const bgImage = window.getComputedStyle(container).backgroundImage;
+    if (!bgImage || bgImage === 'none') {
+      container.classList.add('loaded'); // Reveal if no image
+      return;
+    }
+
+    const imageUrl = bgImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+    
+    // Create preloader
+    const img = new Image();
+    
+    const reveal = () => {
+      container.classList.add('loaded');
+    };
+
+    img.onload = reveal;
+    img.onerror = reveal; // Reveal anyway on error (let CSS handle fallback)
+    img.src = imageUrl;
+
+    // Fallback: Reveal after 2 seconds if something went wrong
+    setTimeout(reveal, 2000);
+    
+    // Check if already complete (from cache)
+    if (img.complete) reveal();
+  });
+}
+
 // Run init
 document.addEventListener('DOMContentLoaded', () => {
   initSmartScroll();
+  initImagePreloader();
 });
 
 // Since we are using Vite and main.js is a module, DOMContentLoaded might have already fired 
 // or main.js might be loaded after it. Most reliably for Vite:
 initSmartScroll();
+initImagePreloader();
