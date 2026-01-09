@@ -346,6 +346,8 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+  padding: inherit; /* Align text by inheriting parent padding */
+  box-sizing: inherit; /* Ensure padding is handled the same way */
   z-index: 2;
 
   /* Text Transparency for clipping */
