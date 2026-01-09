@@ -506,7 +506,7 @@ body {
     text-align: center;
     width: 100%;
     margin: 0;
-    padding: 4rem 1rem 3rem 1rem; /* Generous padding top/bottom */
+    padding: 1rem 1rem 2rem 1rem; /* Generous padding top/bottom */
     font-size: clamp(3.5rem, 14vw, 7rem); /* Large title */
     white-space: normal;
     line-height: 1.1;
@@ -521,6 +521,7 @@ body {
     height: clamp(35vh, 45vh, 55vh); /* Ensure image is visible and has height */
     position: relative;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-position: 50% 72%;
   }
 
   .home-date-location,
@@ -570,7 +571,7 @@ body {
     position: relative;
     bottom: auto;
     left: auto;
-    margin: 4rem auto 6rem auto; /* Breath space top/bottom */
+    margin: 2rem auto 2rem auto; /* Breath space top/bottom */
     text-align: center;
     width: 100%;
     z-index: 2;
