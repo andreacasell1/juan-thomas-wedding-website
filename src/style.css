@@ -1075,6 +1075,27 @@ body {
     overflow-wrap: anywhere;
   }
 
+  /* Google Maps Container - Mobile Responsive */
+  .map-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   /* Hide arrows on mobile, just scroll naturally */
   .scroll-arrow-container,
   .scroll-arrow-up {
@@ -1351,8 +1372,35 @@ main h1 {
     opacity: 0.8;
   }
 
+  /* Google Maps Container - Responsive */
+  .map-container {
+    position: relative;
+    width: 100%;
+    max-width: 750px;
+    margin-left: auto;
+    margin-top: 1.5rem;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   /* Left Aligned Paragraphs */
   .page-left .content-section p {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .page-left .map-container {
     margin-left: 0;
     margin-right: auto;
   }
@@ -1608,7 +1656,8 @@ main h1 {
 }
 
 .bg-location {
-  background-image: url('/media/house.jpg');
+  background-image: url('/media/il_poggiolino.png');
+  background-size: contain;
 }
 
 .bg-details {
