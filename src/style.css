@@ -830,7 +830,7 @@ body {
 
   /* HOMEPAGE MOBILE STYLES - Inherited from Small Screens grid above */
   .home-names {
-    padding: 4rem 1rem 3rem 1rem; /* More padding top/bottom */
+    padding: 2rem 1rem 2rem 1rem; /* More padding top/bottom */
     font-size: clamp(3.5rem, 15vw, 5rem); /* Bigger title */
     margin-bottom: 0;
   }
