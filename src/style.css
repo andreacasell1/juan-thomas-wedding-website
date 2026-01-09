@@ -484,171 +484,122 @@ body {
 
 /* Tablet / iPad Layout (768px - 1200px) - FOR TOUCH DEVICES */
 /* Use pointer: coarse as fallback for better touch device detection */
-@media screen and (min-width: 768px) and (max-width: 1200px) {
+/* Small Screens Layout (Tablet & Mobile, < 1200px) */
+@media screen and (max-width: 1200px) {
   .home-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
     height: auto;
-    overflow: visible; /* Allow scroll if content exceeds screen height */
-    background: linear-gradient(to right, var(--color-grad-start), var(--color-grad-end));
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: linear-gradient(to bottom, var(--color-grad-start), var(--color-grad-end));
   }
 
-  /* Title - Top Center */
+  /* 1. Title Block (Top) */
   .home-names {
-    order: 1;
+    grid-row: 1;
     position: relative;
     top: auto;
     left: auto;
     transform: none;
     text-align: center;
-    margin: clamp(3rem, 6vh, 4rem) auto 1.5rem auto;
-    /* Added more top margin for overlay clearance */
-    width: 90%;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    /* Slightly smaller font */
+    width: 100%;
+    margin: 0;
+    padding: 4rem 1rem 3rem 1rem; /* Generous padding top/bottom */
+    font-size: clamp(3.5rem, 14vw, 7rem); /* Large title */
     white-space: normal;
-    line-height: 1.0;
+    line-height: 1.1;
     z-index: 10;
     flex-shrink: 0;
   }
 
-  /* Overlays on Image - Change to relative and join the flex flow for safety */
+  /* 2. Image Area (Middle) - Overlays share this grid row */
+  .home-left {
+    grid-row: 2;
+    width: 100%;
+    height: clamp(35vh, 45vh, 55vh); /* Ensure image is visible and has height */
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
   .home-date-location,
   .home-update {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    transform: none;
+    grid-row: 2; /* Overlap with the image in row 2 */
+    position: absolute;
+    top: 1.5rem;
     z-index: 15;
-    margin: 0.5rem auto;
-    text-align: center;
-    width: 90%;
-    order: 0; /* Place before title */
-  }
-
-  .home-names {
-    order: 1;
-    position: relative;
-    top: auto;
-    left: auto;
     transform: none;
-    text-align: center;
-    margin: 1rem auto 1.5rem auto;
-    width: 90%;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    white-space: normal;
-    line-height: 1.0;
-    z-index: 10;
-    flex-shrink: 0;
+    width: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Specific styles for stacked overlays on tablet */
   .home-date-location {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    left: 1.5rem;
+    text-align: left;
+    align-items: flex-start;
   }
 
   .home-update {
-    display: none; /* Hide update on small screens to save space, or stack it */
+    right: 1.5rem;
+    text-align: right;
+    align-items: flex-end;
   }
 
+  /* Enforce two lines and correct font sizes for overlays */
   .home-location,
   .home-date,
   .home-update-title,
   .home-update-date {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    text-align: center;
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
   }
 
-  /* Right panel becomes a simple wrapper or "contents" to let children flex */
+  /* 3. Content Panel (Wrapper) - Uses contents to let Title and Menu be positioned in grid */
   .home-right {
-    order: 3;
-    display: contents; /* Let Title and Menu be part of the main flex stack if they were children */
-    background: none;
-    padding: 0;
+    display: contents;
   }
 
   /* Menu - Bottom Center */
   .home-menu {
-    order: 3; /* Matches home-right's natural position in the stack if it was a flat structure */
+    grid-row: 3;
     position: relative;
     bottom: auto;
     left: auto;
-    margin: clamp(1.5rem, 4vh, 3rem) auto;
+    margin: 4rem auto 6rem auto; /* Breath space top/bottom */
     text-align: center;
     width: 100%;
     z-index: 2;
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 1rem;
   }
 
   .home-menu li {
-    margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+    margin-bottom: 1.2rem;
     display: block;
     width: 100%;
   }
 
   .home-menu a {
     text-align: center;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem);
     margin: 0 auto;
     width: auto;
-    min-width: clamp(250px, 40vw, 400px);
+    min-width: clamp(260px, 60vw, 400px);
     max-width: 90vw;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.5rem 1rem;
     box-sizing: border-box;
   }
-  
-  /* Additional height-specific adjustments for very short viewports */
-  @media (max-height: 700px) {
-    .home-right {
-      padding: 1rem 0 0.5rem 0;
-    }
-    
-    .home-names {
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      margin-bottom: 0.5rem;
-    }
-    
-    .home-left {
-      height: clamp(25vh, 35vh, 40vh);
-      max-height: 35vh;
-    }
-    
-    .home-menu {
-      margin-top: 0.5rem;
-    }
-    
-    .home-menu li {
-      margin-bottom: 0.2rem;
-    }
-    
-    .home-menu a {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-    }
-    
-    .home-date-location,
-    .home-update {
-      top: calc(clamp(18%, 20vh, 22%) + 0.5rem);
-    }
-    
-    .home-location,
-    .home-date,
-    .home-update-title,
-    .home-update-date {
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-    }
-  }
+
+  /* Hide shimmer on title for mobile/tablet to improve legibility if needed, 
+     but keeping it as it was likely requested. */
+
 
   /* -----------------------------------------------------------
      INTERNAL PAGES TABLET LAYOUT
@@ -874,111 +825,35 @@ body {
 /* Mobile Layout (< 768px) */
 @media (max-width: 767px) {
 
-  /* HOMEPAGE MOBILE STYLES */
-  .home-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-    background: linear-gradient(to right, var(--color-grad-start), var(--color-grad-end));
-    padding-bottom: 2rem;
+  /* HOMEPAGE MOBILE STYLES - Inherited from Small Screens grid above */
+  .home-names {
+    padding: 4rem 1rem 3rem 1rem; /* More padding top/bottom */
+    font-size: clamp(3.5rem, 15vw, 5rem); /* Bigger title */
+    margin-bottom: 0;
   }
 
   .home-left {
-    order: 2;
-    position: relative;
-    width: 100%;
-    height: clamp(30vh, 35vh, 40vh);
-    flex-shrink: 0;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    height: clamp(35vh, 40vh, 50vh);
   }
 
   .home-date-location,
   .home-update {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    z-index: 15;
-    margin: 0.5rem auto;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    order: 0;
+    top: 1.2rem;
+    width: 48%; 
   }
 
   .home-date-location {
-    margin-top: 1.5rem;
+    left: 1.2rem;
   }
 
   .home-update {
-    display: none; /* Hide to save space on mobile */
+    right: 1.2rem;
+    display: flex; 
   }
 
-  .home-location,
-  .home-date,
-  .home-update-title,
-  .home-update-date {
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    text-align: center;
-  }
-
-  .home-right {
-    display: contents;
-    background: none;
-    padding: 0;
-  }
-
-  /* Names - Scaled down for mobile */
-  .home-names {
-    order: 1;
-    position: relative;
-    transform: none;
-    font-size: clamp(2.8rem, 12vw, 4rem);
-    text-align: center;
-    margin: 0.5rem auto 1.5rem auto;
-    width: 95%;
-    white-space: normal;
-    line-height: 1.1;
-    flex-shrink: 0;
-    top: 0;
-    z-index: 10;
-  }
-
-  /* Menu - Center aligned stack */
   .home-menu {
-    order: 3;
-    position: relative;
-    margin: 1.5rem auto;
-    text-align: center;
-    width: 100%;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 10;
-  }
-
-  .home-menu li {
-    margin-bottom: 0.8rem;
-    width: 100%;
-  }
-
-  .home-menu a {
-    width: auto;
-    min-width: 260px;
-    max-width: 85vw;
-    font-size: 1.05rem;
-    text-align: center;
-    padding: 0.6rem 1rem;
-    /* Better touch target */
-    overflow-wrap: break-word;
-    box-sizing: border-box;
-    border-radius: 4px;
+    margin-top: 4rem; /* More space from image above */
+    margin-bottom: 6rem;
   }
 
   /* INTERNAL PAGES MOBILE STYLES */
