@@ -1650,6 +1650,12 @@ main h1 {
   background-size: 118%;
 }
 
+@media (min-width: 2300px) {
+  .bg-location {
+    background-position: 0% 75%;
+  }
+}
+
 /* Very Small Screens (< 320px) - Extra small devices */
 @media (max-width: 319px) {
 
