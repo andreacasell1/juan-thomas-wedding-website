@@ -353,8 +353,10 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  padding: inherit; /* Align text by inheriting parent padding */
-  box-sizing: inherit; /* Ensure padding is handled the same way */
+  padding: inherit;
+  /* Align text by inheriting parent padding */
+  box-sizing: inherit;
+  /* Ensure padding is handled the same way */
   z-index: 2;
 
   /* Text Transparency for clipping */
@@ -515,8 +517,10 @@ body {
     text-align: center;
     width: 100%;
     margin: 0;
-    padding: 1rem 1rem 2rem 1rem; /* Generous padding top/bottom */
-    font-size: clamp(3.5rem, 14vw, 7rem); /* Large title */
+    padding: 1rem 1rem 2rem 1rem;
+    /* Generous padding top/bottom */
+    font-size: clamp(3.5rem, 14vw, 7rem);
+    /* Large title */
     white-space: normal;
     line-height: 1.1;
     z-index: 10;
@@ -527,7 +531,8 @@ body {
   .home-left {
     grid-row: 2;
     width: 100%;
-    height: clamp(35vh, 45vh, 55vh); /* Ensure image is visible and has height */
+    height: clamp(35vh, 45vh, 55vh);
+    /* Ensure image is visible and has height */
     position: relative;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     background-position: 50% 72%;
@@ -535,7 +540,8 @@ body {
 
   .home-date-location,
   .home-update {
-    grid-row: 2; /* Overlap with the image in row 2 */
+    grid-row: 2;
+    /* Overlap with the image in row 2 */
     position: absolute;
     top: 1.5rem;
     z-index: 15;
@@ -580,7 +586,8 @@ body {
     position: relative;
     bottom: auto;
     left: auto;
-    margin: 2rem auto 2rem auto; /* Breath space top/bottom */
+    margin: 2rem auto 2rem auto;
+    /* Breath space top/bottom */
     text-align: center;
     width: 100%;
     z-index: 2;
@@ -837,8 +844,10 @@ body {
 
   /* HOMEPAGE MOBILE STYLES - Inherited from Small Screens grid above */
   .home-names {
-    padding: 2rem 1rem 2rem 1rem; /* More padding top/bottom */
-    font-size: clamp(3.5rem, 15vw, 5rem); /* Bigger title */
+    padding: 2rem 1rem 2rem 1rem;
+    /* More padding top/bottom */
+    font-size: clamp(3.5rem, 15vw, 5rem);
+    /* Bigger title */
     margin-bottom: 0;
   }
 
@@ -849,24 +858,28 @@ body {
   .home-date-location,
   .home-update {
     top: 1.2rem;
-    width: 48%; 
+    width: 48%;
   }
 
   .home-date-location {
     left: 1.2rem;
   }
 
-  .home-location, .home-date, .home-update-title, .home-update-date {
+  .home-location,
+  .home-date,
+  .home-update-title,
+  .home-update-date {
     font-size: 1.5rem;
   }
 
   .home-update {
     right: 1.2rem;
-    display: flex; 
+    display: flex;
   }
 
   .home-menu {
-    margin-top: 2.5rem; /* More space from image above */
+    margin-top: 2.5rem;
+    /* More space from image above */
     margin-bottom: 2rem;
   }
 
@@ -1017,13 +1030,21 @@ body {
     overflow-wrap: anywhere;
   }
 
+  .map-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
   /* Google Maps Container - Mobile Responsive */
   .map-container {
     position: relative;
     width: 100%;
     max-width: 100%;
     margin-top: 1rem;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -1316,6 +1337,13 @@ main h1 {
     opacity: 0.8;
   }
 
+  .map-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
   /* Google Maps Container - Responsive */
   .map-container {
     position: relative;
@@ -1323,7 +1351,8 @@ main h1 {
     max-width: 750px;
     margin-left: auto;
     margin-top: 1.5rem;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -1594,7 +1623,7 @@ main h1 {
 }
 
 .bg-travel {
-  background-image: url('/media/travel.jpg');
+  background-image: url('/media/August_Wilh_Ahlborn_Kopie.jpg');
 }
 
 .bg-stay {
@@ -1602,7 +1631,7 @@ main h1 {
 }
 
 .bg-location {
-  background-image: url('/media/il_poggiolino.png');
+  background-image: url('/media/poggiolino.png');
   background-size: contain;
 }
 
@@ -1715,6 +1744,12 @@ main h1 {
     background-size: 195%;
     background-position: 60% 15%;
   }
+
+  .bg-location {
+    background-size: 110%;
+    background-position: 0% 75%;
+  }
+
 }
 
 @media (min-width: 1201px) and (max-width: 1499px) {
