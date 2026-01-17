@@ -42,6 +42,12 @@ body {
   display: none !important;
 }
 
+sup {
+  font-size: 0.6em;
+  margin-left: 0.15em;
+  vertical-align: super;
+}
+
 /* ---------------------------------------------------------
    HOMEPAGE LAYOUT (Split Screen)
    --------------------------------------------------------- */
